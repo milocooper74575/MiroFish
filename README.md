@@ -173,7 +173,7 @@ npm run frontend  # 仅启动前端
 # 1. 配置环境变量，文件目录：backend\.env
 
 # 2. 构建镜像
-docker build -t simulation-backend:latest -f backend/Dockerfile .
+docker build --platform linux/amd64 --provenance=false -t simulation-backend:[镜像版本号] -f backend/Dockerfile .
 
 # 3. 本地启动测试
 docker run -it --name mirofish-backend -p 5001:5001 simulation-backend:latest
