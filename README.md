@@ -5,8 +5,8 @@
 <a href="https://trendshift.io/repositories/16144" target="_blank"><img src="https://trendshift.io/api/badge/repositories/16144" alt="666ghj%2FMiroFish | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
 
 简洁通用的群体智能引擎，预测万物
-</br>
-<em>A Simple and Universal Swarm Intelligence Engine, Predicting Anything</em>
+`</br>`
+`<em>`A Simple and Universal Swarm Intelligence Engine, Predicting Anything `</em>`
 
 <a href="https://www.shanda.com/" target="_blank"><img src="./static/image/shanda_logo.png" alt="666ghj%2MiroFish | Shanda" height="40"/></a>
 
@@ -28,7 +28,7 @@
 
 **MiroFish** 是一款基于多智能体技术的新一代 AI 预测引擎。通过提取现实世界的种子信息（如突发新闻、政策草案、金融信号），自动构建出高保真的平行数字世界。在此空间内，成千上万个具备独立人格、长期记忆与行为逻辑的智能体进行自由交互与社会演化。你可透过「上帝视角」动态注入变量，精准推演未来走向——**让未来在数字沙盘中预演，助决策在百战模拟后胜出**。
 
-> 你只需：上传种子材料（数据分析报告或者有趣的小说故事），并用自然语言描述预测需求</br>
+> 你只需：上传种子材料（数据分析报告或者有趣的小说故事），并用自然语言描述预测需求 `</br>`
 > MiroFish 将返回：一份详尽的预测报告，以及一个可深度交互的高保真数字世界
 
 ### 我们的愿景
@@ -71,6 +71,7 @@ MiroFish 致力于打造映射现实的群体智能镜像，通过捕捉个体�
 <a href="https://www.bilibili.com/video/BV1VYBsBHEMY/" target="_blank"><img src="./static/image/武大模拟演示封面.png" alt="MiroFish Demo Video" width="75%"/></a>
 
 点击图片查看使用微舆BettaFish生成的《武大舆情报告》进行预测的完整演示视频
+
 </div>
 
 ### 2. 《红楼梦》失传结局推演预测
@@ -79,6 +80,7 @@ MiroFish 致力于打造映射现实的群体智能镜像，通过捕捉个体�
 <a href="https://www.bilibili.com/video/BV1cPk3BBExq" target="_blank"><img src="./static/image/红楼梦模拟推演封面.jpg" alt="MiroFish Demo Video" width="75%"/></a>
 
 点击图片查看基于《红楼梦》前80回数十万字，MiroFish深度预测失传结局
+
 </div>
 
 > **金融方向推演预测**、**时政要闻推演预测**等示例陆续更新中...
@@ -97,11 +99,11 @@ MiroFish 致力于打造映射现实的群体智能镜像，通过捕捉个体�
 
 #### 前置要求
 
-| 工具 | 版本要求 | 说明 | 安装检查 |
-|------|---------|------|---------|
-| **Node.js** | 18+ | 前端运行环境，包含 npm | `node -v` |
-| **Python** | ≥3.11, ≤3.12 | 后端运行环境 | `python --version` |
-| **uv** | 最新版 | Python 包管理器 | `uv --version` |
+| 工具              | 版本要求       | 说明                   | 安装检查             |
+| ----------------- | -------------- | ---------------------- | -------------------- |
+| **Node.js** | 18+            | 前端运行环境，包含 npm | `node -v`          |
+| **Python**  | ≥3.11, ≤3.12 | 后端运行环境           | `python --version` |
+| **uv**      | 最新版         | Python 包管理器        | `uv --version`     |
 
 #### 1. 配置环境变量
 
@@ -152,6 +154,7 @@ npm run dev
 ```
 
 **服务地址：**
+
 - 前端：`http://localhost:3000`
 - 后端 API：`http://localhost:5001`
 
@@ -165,11 +168,35 @@ npm run frontend  # 仅启动前端
 ### 二、Docker 部署
 
 ```bash
-# 1. 配置环境变量（同源码部署）
-cp .env.example .env
+后端部署：
 
-# 2. 拉取镜像并启动
-docker compose up -d
+# 1. 配置环境变量，文件目录：backend\.env
+
+# 2. 构建镜像
+docker build -t simulation-backend:latest -f backend/Dockerfile .
+
+# 3. 本地启动测试
+docker run -it --name mirofish-backend -p 5001:5001 simulation-backend:latest
+
+# 4. 登录阿里云 Container Registry
+docker login --username=13141292714 crpi-aof8naxzbgkl7ieq.cn-beijing.personal.cr.aliyuncs.com
+
+
+# 5. 上传镜像到阿里云
+docker tag [ImageId] crpi-aof8naxzbgkl7ieq.cn-beijing.personal.cr.aliyuncs.com/apluswedding/simulation:[镜像版本号]
+docker push crpi-aof8naxzbgkl7ieq.cn-beijing.personal.cr.aliyuncs.com/apluswedding/simulation:[镜像版本号]
+
+# 6. 去函数计算FC部署
+
+前端部署：
+
+# 1. 本地运行
+cd frontend
+npm run dev
+
+# 2. 打包生产环境
+cd frontend
+VITE_API_BASE_URL=https://simulation-zbjkemrowc.cn-beijing.fcapp.run npm run build
 ```
 
 默认会读取根目录下的 `.env`，并映射端口 `3000（前端）/5001（后端）`
